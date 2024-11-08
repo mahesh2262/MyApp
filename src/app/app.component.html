@@ -1,0 +1,59 @@
+<ion-app>
+  <ion-menu content-id="main-content" class="app">
+    <ion-header class="header">
+      <div>
+        <ion-title class="displayname">{{userName}}</ion-title>
+      </div>
+      <div>
+        <ion-title class="email">{{email}}</ion-title>
+      </div>
+    </ion-header>
+    <ion-content class="ion-padding">
+      <ion-menu-toggle auto-hide="false" *ngFor="let m of menu">
+        <ion-item class="menu-item">{{m.item}}</ion-item>
+        <ion-item *ngFor="let q of m.children" [routerDirection]="'root'" [routerLink]="[q.url]">
+          <ion-icon slot="start" [name]="q.icon"></ion-icon>
+          <ion-label>
+            {{q.title}}
+          </ion-label>
+        </ion-item>
+      </ion-menu-toggle>
+    </ion-content>
+  </ion-menu>
+  <div class="ion-page" id="main-content">
+    <ion-header class="header" *ngIf="showHeader">
+      <ion-toolbar class=" toolbar">
+        <ion-buttons slot="start">
+          <ion-menu-button></ion-menu-button>
+        </ion-buttons>
+        <div>
+          <ion-title class="displayname">Hello {{userName}},</ion-title>
+        </div>
+        <ion-title>Toolbar</ion-title>
+        <ion-buttons slot="end" class="ion-padding">
+          <ion-icon icon="settings" class="settings-icon" id="click-trigger"></ion-icon>
+  
+          <div>
+            <ion-popover #popover trigger="click-trigger" triggerAction="click">
+              <ng-template>
+                <ion-item style="font-size: 14px;">
+                  <ion-icon slot="start" name="lock-closed"></ion-icon>
+                  Change Password
+                </ion-item>
+                <ion-item style="font-size: 14px;">
+                  <ion-icon slot="start" name="log-out"></ion-icon>
+                  Log out
+                </ion-item>
+              </ng-template>
+            </ion-popover>
+          </div>
+        </ion-buttons>
+      </ion-toolbar>
+  
+  
+    </ion-header>
+    <ion-content class="ion-padding">
+      <ion-router-outlet id="main"></ion-router-outlet>
+    </ion-content>
+  </div>
+</ion-app>

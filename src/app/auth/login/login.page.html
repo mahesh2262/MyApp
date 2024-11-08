@@ -1,0 +1,39 @@
+<ion-content class="login">
+    <ion-grid>
+        <ion-row>
+            <img src="../../../assets/background/login-head.png" alt="login-header-img" height="140" width="100%">
+        </ion-row>
+
+        <ion-row>
+            <ion-col class="ion-text-center">
+                <h4><b>Welcome Back!</b></h4>
+                <p class="sign">Sign in to your Account</p>
+            </ion-col>
+        </ion-row>
+
+        <ion-row>
+            <ion-col>
+                <form [formGroup]="loginForm">
+                    <ion-item>
+                        <ion-label position="floating">Username</ion-label>
+                        <ion-input type="text" formControlName="userName"></ion-input>
+                        <!-- <ion-icon slot="end" fill="clear" class="iconEye" name="person"></ion-icon> -->
+                
+                      </ion-item>
+
+                      <ion-item>
+                        <ion-label position="floating">Password</ion-label>
+                        <ion-input formControlName="password"></ion-input>
+                        
+                      </ion-item>
+                </form>
+
+                <ion-row class="ion-justify-content-center ">
+                    <ion-button (click)="login()"> Login </ion-button>
+                </ion-row>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+
+
+</ion-content>

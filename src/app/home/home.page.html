@@ -1,0 +1,110 @@
+<ion-content>
+  <ion-button (click)="modal.present()">Open Modal</ion-button>
+
+  <ion-button (click)="clickPicture()">Open Camera</ion-button>
+
+  <!-- <ion-row *ngIf="imageUrl" style="margin-top: 20px;">
+    <img [src]="imageUrl" style="width: 100%; height: auto;" />
+  </ion-row> -->
+
+  <ion-row *ngIf="selectedFile" style="margin-top: 20px;">
+    <img [src]="photo" alt="Captured Image" />
+  <!-- <p>File Name: {{ picName }}</p> -->
+  </ion-row>
+
+  <ion-modal id="modal" #modal>
+    <ng-template>
+      <ion-grid>
+        <ion-row>
+          <h4>Hello</h4>
+        </ion-row>
+
+        <ion-row>
+          <ion-button (click)="getPhoto()">Get Photo Name</ion-button>
+        </ion-row>
+
+        <ion-row *ngIf="picName" style="margin-top: 20px;">
+          <!-- <img [src]="modalPPhoto" alt="Captured Image" /> -->
+        <p>File Name: {{ picName }}</p>
+        </ion-row>
+
+        <ion-row>
+          <ion-button (click)="getPlatform()">Get Platform Name</ion-button>
+          <p *ngIf="platformName">{{platformName}}</p>
+          
+        </ion-row>
+
+        <ion-row>
+          <ion-button (click)="modal.dismiss()">Close</ion-button>
+        </ion-row>
+      </ion-grid>
+    </ng-template>
+  </ion-modal>
+
+  <ion-modal #platformModal>
+    <ng-template>
+      <ion-grid>
+        <ion-row>
+          <h3>{{platformName}}</h3>
+        </ion-row>
+
+        <ion-row>
+          <ion-button (click)="platformModal.dismiss()">Close</ion-button>
+        </ion-row>
+      </ion-grid>
+    </ng-template>
+  </ion-modal>
+</ion-content>
+
+
+<!-- <ion-content>
+  <ion-item>
+    <input type="file" (change)="onFileSelected($event)" />
+  </ion-item>
+
+  <ion-row *ngIf="isFileSelected && fileUrl">
+    <p>Uploaded File:</p>
+    <img *ngIf="selectedFile.type.startsWith('image')" [src]="fileUrl" alt="uploaded image" />
+    <video *ngIf="selectedFile.type.startsWith('video')" controls>
+      <source [src]="fileUrl" type="video/mp4" />
+      Your browser does not support the video tag.
+    </video>
+    <object *ngIf="selectedFile.type === 'application/pdf'" [data]="fileUrl" type="application/pdf" width="100%" height="400px">
+      PDF is not supported.
+    </object>
+  </ion-row>
+
+  <ion-button (click)="downloadFile()">Download File</ion-button>
+    <ion-button (click)="downloadFileWithName('custom-name')">Download with Custom Name</ion-button>
+ 
+</ion-content> -->
+
+<ion-content>
+	<h3 *ngIf="images.length == 0" class="ion-padding ion-text-center">Please Select Image!</h3>
+
+	<ion-list>
+		<ion-item *ngFor="let file of images; let i = index">
+			<ion-thumbnail slot="start">
+				<ion-img [src]="file.data"></ion-img>
+			</ion-thumbnail>
+			<ion-label class="ion-text-wrap"> {{ file.name }} </ion-label>
+			<ion-button slot="end" fill="clear" (click)="startUpload(file)">
+				<ion-icon slot="icon-only" name="cloud-upload"></ion-icon>
+			</ion-button>
+			<ion-button slot="end" fill="clear" (click)="deleteImage(file)">
+				<ion-icon slot="icon-only" name="trash"></ion-icon>
+			</ion-button>
+		</ion-item>
+	</ion-list>
+</ion-content>
+
+<ion-footer>
+	<ion-toolbar color="primary">
+		<ion-button fill="clear" expand="full" color="light" (click)="selectImage()">
+			<ion-icon slot="start" name="camera"></ion-icon>
+			Select Image
+		</ion-button>
+
+    <ion-button (click)="writeHelloFile()">Write Hello File</ion-button>
+	</ion-toolbar>
+</ion-footer>
